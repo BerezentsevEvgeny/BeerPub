@@ -19,7 +19,6 @@ class MenuCollectionViewController: UICollectionViewController {
         createDataSource()
         createSnapshot()
         updateData()
-        // self.clearsSelectionOnViewWillAppear = false
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -31,7 +30,6 @@ class MenuCollectionViewController: UICollectionViewController {
         guard let detailVC = segue.destination as? DetailViewController else { return  }
         detailVC.beerItem = sender as? Beer
     }
-    
     
     private func updateData() {
         networkManager.fetchData {[weak self] result in
@@ -61,8 +59,6 @@ class MenuCollectionViewController: UICollectionViewController {
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
-    
-      
 }
 
 extension MenuCollectionViewController {
@@ -71,7 +67,7 @@ extension MenuCollectionViewController {
     private func createDataSource() {
         let registration = UICollectionView.CellRegistration<UICollectionViewListCell,Beer> { cell, indexPath, beer in
             var content = cell.defaultContentConfiguration()
-            content.image = UIImage(systemName: "dollarsign.circle")
+            content.image = UIImage(systemName: "arrow.right.circle")
             content.text = beer.name
             content.secondaryText = beer.tagline
             cell.contentConfiguration = content
@@ -91,60 +87,6 @@ extension MenuCollectionViewController {
 
 extension MenuCollectionViewController {
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
-        
     }
 }
-    
-
-    
-
-
-
-
-    // MARK: UICollectionViewDataSource
-
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        10
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-//
-//
-//
-//
-//
-//        return cell
-//    }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
+ 

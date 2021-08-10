@@ -17,7 +17,7 @@ class MenuCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         setupLayout()
         createDataSource()
-        createSnapshot()
+//        createSnapshot()
         updateData()
     }
     
@@ -34,16 +34,22 @@ class MenuCollectionViewController: UICollectionViewController {
     private func updateData() {
         networkManager.fetchData {[weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let listOfBeers):
-                    self.beers = listOfBeers
-                    self.createSnapshot()
-                case .failure(let error):
-                    print(error)
-                }
+            switch result {
+            case .success(let listOfBeers):
+                self.beers = listOfBeers
+                self.createSnapshot()
+//                DispatchQueue.main.async {
+//
+//                }
+            case .failure(let error):
+                print(error)
             }
+
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
     }
         
     private func createSnapshot() {
@@ -65,13 +71,11 @@ extension MenuCollectionViewController {
     
     //MARK: - DataSource
     private func createDataSource() {
-        let registration = UICollectionView.CellRegistration<UICollectionViewListCell,Beer> { cell, indexPath, beer in
-            var content = cell.defaultContentConfiguration()
-            content.image = UIImage(systemName: "arrow.right.circle")
-            content.text = beer.name
-            content.secondaryText = beer.tagline
-            cell.contentConfiguration = content
-            cell.accessories = [.disclosureIndicator()]
+        let registration = UICollectionView.CellRegistration<BeerCollectionViewListCell,Beer> { cell, indexPath, beer in
+            cell.configureCell(with: beer) {
+
+            }
+
         }
         
         dataSource = UICollectionViewDiffableDataSource<Sections,Beer>(collectionView: collectionView, cellProvider: { collectionView, index, beer in

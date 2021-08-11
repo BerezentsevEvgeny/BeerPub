@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    
+        
     @IBOutlet weak var beerImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -36,7 +36,10 @@ class DetailViewController: UIViewController {
             let alertLabel = UIAlertController(title: "Thank you for order!", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default)
             alertLabel.addAction(okAction)
-            self.present(alertLabel, animated: true)
+            self.present(alertLabel, animated: true) {
+                DataManager.shared.orderedItems.append(self.beerItem)
+                print(DataManager.shared.orderedItems)
+            }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(okAction)
@@ -46,20 +49,15 @@ class DetailViewController: UIViewController {
     
     private func setupView() {
         title = beerItem.name
-        fetchImage(with: beerItem.image_url ?? "")
         descriptionLabel.text = beerItem.description
         priceLabel.text = Int.random(in: 2...5).description + " $"
-    }
-    
-    private func fetchImage(with urlString: String) {
-        DispatchQueue.global().async {
-            guard let url = URL(string: urlString) else { return }
-            guard let imageData = try? Data(contentsOf: url) else { return  }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+        NetworkManager.shared.fetchImage(with: beerItem.image_url ?? "") {[weak self] imageData in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
                 self.beerImageView.image = UIImage(data: imageData)
                 self.activityIndicator.stopAnimating()
             }
+
         }
     }
 

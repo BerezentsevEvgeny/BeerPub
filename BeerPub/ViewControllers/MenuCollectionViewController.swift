@@ -10,15 +10,14 @@ import UIKit
 class MenuCollectionViewController: UICollectionViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Sections,Beer>!
-    private var networkManager = NetworkManager()
     private var beers: [Beer] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
         createDataSource()
-//        createSnapshot()
         updateData()
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -32,26 +31,18 @@ class MenuCollectionViewController: UICollectionViewController {
     }
     
     private func updateData() {
-        networkManager.fetchData {[weak self] result in
+        NetworkManager.shared.fetchData {[weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let listOfBeers):
                 self.beers = listOfBeers
                 self.createSnapshot()
-//                DispatchQueue.main.async {
-//
-//                }
             case .failure(let error):
                 print(error)
             }
-
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        collectionView.reloadData()
-    }
-        
+            
     private func createSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Sections,Beer>()
         snapshot.appendSections([.main])
@@ -72,10 +63,7 @@ extension MenuCollectionViewController {
     //MARK: - DataSource
     private func createDataSource() {
         let registration = UICollectionView.CellRegistration<BeerCollectionViewListCell,Beer> { cell, indexPath, beer in
-            cell.configureCell(with: beer) {
-
-            }
-
+            cell.configureCell(with: beer)
         }
         
         dataSource = UICollectionViewDiffableDataSource<Sections,Beer>(collectionView: collectionView, cellProvider: { collectionView, index, beer in

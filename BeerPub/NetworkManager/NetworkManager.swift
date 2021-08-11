@@ -10,38 +10,37 @@ import Alamofire
 
 
 class NetworkManager {
+    
+    static var shared = NetworkManager()
         
     func fetchData(complition: @escaping (Result<[Beer],Error>) -> Void ) {
-//        let urlString = "https://api.punkapi.com/v2/beers?page=1&per_page=20"
-//        guard let url = URL(string: urlString) else { return }
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            guard let data = data, error == nil else {
-//                print(error ?? "No error description")
-//                return }
-//            do {
-//                let beers = try JSONDecoder().decode([Beer].self, from: data)
-//                complition(.success(beers))
-//            } catch let error {
-//                complition(.failure(error))
-//            }
-//        }
-//        .resume()
-//    }
         let urlString = "https://api.punkapi.com/v2/beers?page=1&per_page=20"
         AF.request(urlString)
             .validate()
             .responseDecodable(of: [Beer].self) { response in
                 switch response.result {
                 case .success(let beers):
-                    complition(.success(beers))
+                    DispatchQueue.main.async {
+                        complition(.success(beers))
+                    }
                 case .failure(let error):
                     complition(.failure(error))
                 }
             }
-        
-        
-        
-        
     }
+    
+    
+    func fetchImage(with urlString: String, completion: @escaping (Data)-> Void) {
+        AF.request(urlString).validate().responseData { response in
+            guard let data = response.data else { return }
+            DispatchQueue.main.async {
+                completion(data)
+            }
+            
+        }
+    }
+    
+    private init() {}
 
 }
+

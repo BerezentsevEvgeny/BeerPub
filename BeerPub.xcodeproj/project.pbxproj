@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,8 @@
 		637DC50D26BE5AE400564CC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 637DC50B26BE5AE400564CC2 /* LaunchScreen.storyboard */; };
 		637DC51526BE5B8200564CC2 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DC51426BE5B8200564CC2 /* MenuCollectionViewController.swift */; };
 		637DC51926BE5E1000564CC2 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637DC51826BE5E1000564CC2 /* Beer.swift */; };
+		63DFE9BB26C4460200F07183 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFE9BA26C4460200F07183 /* DataManager.swift */; };
+		63DFE9BD26C447D700F07183 /* OrderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFE9BC26C447D700F07183 /* OrderTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		637DC50E26BE5AE400564CC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		637DC51426BE5B8200564CC2 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
 		637DC51826BE5E1000564CC2 /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
+		63DFE9BA26C4460200F07183 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		63DFE9BC26C447D700F07183 /* OrderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewController.swift; sourceTree = "<group>"; };
 		92E9F50D14041CBEEC401959 /* Pods-BeerPub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerPub.debug.xcconfig"; path = "Target Support Files/Pods-BeerPub/Pods-BeerPub.debug.xcconfig"; sourceTree = "<group>"; };
 		A3E24365E491759C6D95CB31 /* Pods_BeerPub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerPub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F10735BF47621B5E39EE98 /* Pods-BeerPub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerPub.release.xcconfig"; path = "Target Support Files/Pods-BeerPub/Pods-BeerPub.release.xcconfig"; sourceTree = "<group>"; };
@@ -64,7 +68,6 @@
 				92E9F50D14041CBEEC401959 /* Pods-BeerPub.debug.xcconfig */,
 				B6F10735BF47621B5E39EE98 /* Pods-BeerPub.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -91,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				63663DD926BE8C3C00F860AB /* NetworkManager.swift */,
+				63DFE9BA26C4460200F07183 /* DataManager.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -109,6 +113,7 @@
 			children = (
 				637DC51426BE5B8200564CC2 /* MenuCollectionViewController.swift */,
 				63663DDB26BE9C1300F860AB /* DetailViewController.swift */,
+				63DFE9BC26C447D700F07183 /* OrderTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -134,7 +139,7 @@
 		637DC4FF26BE5AE300564CC2 /* BeerPub */ = {
 			isa = PBXGroup;
 			children = (
-				6368A09726C0152600107AAD /* BeerCollectionViewListCell.swift */,
+				63DFE9B526C43BCB00F07183 /* CustomCells */,
 				63663DDE26BEAD6E00F860AB /* Models */,
 				63663DE026BEB70100F860AB /* Storyboards */,
 				63663DE126BEBD0600F860AB /* ViewControllers */,
@@ -142,6 +147,14 @@
 				63663DDD26BEACF400F860AB /* SupportingFiles */,
 			);
 			path = BeerPub;
+			sourceTree = "<group>";
+		};
+		63DFE9B526C43BCB00F07183 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				6368A09726C0152600107AAD /* BeerCollectionViewListCell.swift */,
+			);
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +272,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				637DC51526BE5B8200564CC2 /* MenuCollectionViewController.swift in Sources */,
+				63DFE9BD26C447D700F07183 /* OrderTableViewController.swift in Sources */,
+				63DFE9BB26C4460200F07183 /* DataManager.swift in Sources */,
 				637DC50126BE5AE300564CC2 /* AppDelegate.swift in Sources */,
 				6368A09826C0152600107AAD /* BeerCollectionViewListCell.swift in Sources */,
 				63663DDA26BE8C3C00F860AB /* NetworkManager.swift in Sources */,

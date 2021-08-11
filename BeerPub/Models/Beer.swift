@@ -13,3 +13,12 @@ struct Beer: Decodable,Hashable {
     let image_url: String?
     let tagline: String?
 }
+
+
+//struct Order {
+//    var items: [Beer]
+//
+//    var itemsCount: Int {
+//        items.count
+//    }
+//}
